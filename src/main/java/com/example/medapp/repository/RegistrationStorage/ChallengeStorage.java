@@ -1,4 +1,4 @@
-package com.example.medapp.service.PasskeyAuth;
+package com.example.medapp.repository.RegistrationStorage;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,6 +35,24 @@ public class ChallengeStorage {
 
     public void removeUserIdentity(String userId) {
         userIdentityMap.remove(userId);
+    }
+
+    public void getChallengeAndUserIdentidyMap(){
+
+        challengeMap.entrySet().forEach(entry -> {
+            String userId = entry.getKey();
+            ByteArray challenge = entry.getValue();  
+            System.out.println("User ID: " + userId);
+            System.out.println("Challenge: " + challenge);
+        });
+
+        userIdentityMap.entrySet().forEach(entry -> {
+            String userId = entry.getKey();
+            UserIdentity userIden = entry.getValue();  
+            System.out.println("User ID: " + userId);
+            System.out.println("User Identity: " + userIden);
+        });
+
     }
 
 }

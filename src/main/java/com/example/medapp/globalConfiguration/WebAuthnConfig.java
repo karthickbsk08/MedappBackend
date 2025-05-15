@@ -14,14 +14,14 @@ public class WebAuthnConfig {
     @Bean
     public RelyingParty relyingParty() {
         RelyingPartyIdentity rpIdentity = RelyingPartyIdentity.builder()
-                .id("192.168.179.42:5000") // Your site's domain (RP ID)
+                .id("localhost") // Your site's domain (RP ID)
                 .name("MedApp") // Display name shown to users
                 .build();
 
         return RelyingParty.builder()
                 .identity(rpIdentity)
                 .credentialRepository(new InMemoryCredentialRepository()) // You must implement this interface
-                .origins(Set.of("*")) // The allowed frontend origin
+                .origins(Set.of("http://localhost:8080")) // The allowed frontend origin               
                 .build();
     }
 }

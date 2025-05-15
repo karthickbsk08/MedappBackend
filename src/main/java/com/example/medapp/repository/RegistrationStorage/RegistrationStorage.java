@@ -1,4 +1,4 @@
-package com.example.medapp.controller.passkeyAuth.FinishRegistration;
+package com.example.medapp.repository.RegistrationStorage;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,5 +21,15 @@ public class RegistrationStorage {
 
     public void removeOptions(String userId) {
         optionsMap.remove(userId);
+    }
+
+    public void getAllCredentialCreationOption() {
+
+        optionsMap.entrySet().forEach(entry -> {
+            String userId = entry.getKey();
+            PublicKeyCredentialCreationOptions options = entry.getValue();
+            System.out.println("User ID: " + userId);
+            System.out.println("Credential Creation Options: " + options);
+        });
     }
 }
