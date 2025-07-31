@@ -1,0 +1,77 @@
+AssertionRequest(
+    publicKeyCredentialRequestOptions = PublicKeyCredentialRequestOptions(
+        challenge = ByteArray(d74cef9c7c2cd6e546bfe5f917ebe28fb1b27a8c09a24f2fe70d3a771a192d58),
+        timeout = Optional.empty,
+        rpId = "localhost",
+        allowCredentials = Optional[[]],
+        userVerification = Optional[PREFERRED],
+        extensions = AssertionExtensionInputs(
+            appid = Optional.empty,
+            largeBlob = Optional.empty,
+            uvm = false
+        )
+    ),
+    username = Optional.empty,
+    userHandle = Optional[
+        ByteArray(29cf2bccbff1336e36e3e426119cef3f64de27c21034134d29a132b7240ab64c)
+    ]
+)
+PublicKeyCredential(
+    id = ByteArray(739c021d0fafa18c84e70502ef661ed0),
+    response = AuthenticatorAssertionResponse(
+        authenticatorData = ByteArray(49960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97631900000000),
+        clientDataJSON = ByteArray(
+            7b2274797065223a22776562617574686e2e676574222c226368616c6c656e6765223a2231307a766e48777331755647762d
+            5835462d76696a374779656f774a6f6b38763577303664786f5a4c5667222c226f726967696e223a22687474703a2f2f6c6f
+            63616c686f73743a38303830222c2263726f73734f726967696e223a66616c73652c226f746865725f6b6579735f63616e5f
+            62655f61646465645f68657265223a22646f206e6f7420636f6d7061726520636c69656e74446174614a534f4e2061676169
+            6e737420612074656d706c6174652e205365652068747470733a2f2f676f6f2e676c2f796162506578227d
+        ),
+        signature = ByteArray(
+            3046022100daeca3353926c3c00eb586c086de44c794e2f47b898987e72aac22f30564d399022100edf65a7a0845c4f87684
+            59ae001a20204e9755f3d1ca537fb696b955a350cb89
+        ),
+        userHandle = Optional[
+            ByteArray(4b6338727a4c5f784d323432342d516d455a7a76503254654a3849514e424e4e4b6145797479514b746b77)
+        ],
+        parsedAuthenticatorData = AuthenticatorData(
+            bytes = ByteArray(49960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97631900000000),
+            flags = AuthenticatorDataFlags(
+                value = 25,
+                UP = true,
+                UV = false,
+                BE = true,
+                BS = true,
+                AT = false,
+                ED = false
+            ),
+            attestedCredentialData = Optional.empty,
+            extensions = Optional.empty
+        ),
+        clientData = CollectedClientData(
+            clientDataJson = ByteArray(
+                7b2274797065223a22776562617574686e2e676574222c226368616c6c656e6765223a2231307a766e48777331755647
+                762d5835462d76696a374779656f774a6f6b38763577303664786f5a4c5667222c226f726967696e223a22687474703a2f
+                2f6c6f63616c686f73743a38303830222c2263726f73734f726967696e223a66616c73652c226f746865725f6b6579735f
+                63616e5f62655f61646465645f68657265223a22646f206e6f7420636f6d7061726520636c69656e74446174614a534f4e
+                20616761696e737420612074656d706c6174652e205365652068747470733a2f2f676f6f2e676c2f796162506578227d
+            ),
+            clientData = {
+                "type": "webauthn.get",
+                "challenge": "10zvnHws1uVGv-X5F-vij7GyeowJok8v5w06dxoZLVg",
+                "origin": "http://localhost:8080",
+                "crossOrigin": false,
+                "other_keys_can_be_added_here": "do not compare clientDataJSON against a template. See https://goo.gl/yabPex"
+            },
+            challenge = ByteArray(d74cef9c7c2cd6e546bfe5f917ebe28fb1b27a8c09a24f2fe70d3a771a192d58),
+            origin = "http://localhost:8080",
+            type = "webauthn.get"
+        )
+    ),
+    authenticatorAttachment = Optional[PLATFORM],
+    clientExtensionResults = ClientAssertionExtensionOutputs(
+        appid = Optional.empty,
+        largeBlob = Optional.empty
+    ),
+    type = PUBLIC_KEY
+)
