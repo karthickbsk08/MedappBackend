@@ -22,8 +22,8 @@ public class FinishRegistrationController {
     @PostMapping("/webauthn/register")
     public ResponseEntity<CommonResp> finishRegistration1(@RequestParam String userId,
             @RequestBody PublicKeyCredential<AuthenticatorAttestationResponse, ClientRegistrationExtensionOutputs> credential) {
-        System.err.println("011: " + credential);
-        System.err.println("012: " + userId);
+        System.out.println("011: " + credential);
+        System.out.println("012: " + userId);
         return ResponseEntity.ok(finishRegistrationservice.finishRegistrationService(userId, credential));
     }
 }

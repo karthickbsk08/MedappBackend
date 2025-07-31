@@ -12,7 +12,7 @@ import java.util.Set;
 public class WebAuthnConfig {
 
     @Bean
-    public RelyingParty relyingParty() {
+    public RelyingParty relyingParty(InMemoryCredentialRepository credentialRepository) {
         RelyingPartyIdentity rpIdentity = RelyingPartyIdentity.builder()
                 .id("localhost") // Your site's domain (RP ID)
                 .name("MedApp") // Display name shown to users
@@ -20,8 +20,8 @@ public class WebAuthnConfig {
 
         return RelyingParty.builder()
                 .identity(rpIdentity)
-                .credentialRepository(new InMemoryCredentialRepository()) // You must implement this interface
-                .origins(Set.of("http://localhost:8080")) // The allowed frontend origin               
+                .credentialRepository(credentialRepository)
+                .origins(Set.of("http://localhost:8080"))
                 .build();
     }
 }

@@ -2,15 +2,11 @@ package com.example.medapp.service.PasskeyAuth;
 
 import java.security.SecureRandom;
 import java.util.Base64;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import com.example.medapp.model.commonResponse.CommonResp;
-import com.example.medapp.repository.RegistrationStorage.ChallengeStorage;
 import com.example.medapp.repository.RegistrationStorage.InMemoryCredentialRepository;
-import com.example.medapp.repository.RegistrationStorage.RegistrationStorage;
 import com.yubico.webauthn.FinishRegistrationOptions;
 import com.yubico.webauthn.RegisteredCredential;
 import com.yubico.webauthn.RegistrationResult;
@@ -25,11 +21,11 @@ import com.yubico.webauthn.data.PublicKeyCredentialCreationOptions;
 @Component
 public class FinishRegistration {
 
-    @Autowired
-    private ChallengeStorage challengeStorage;
+    // @Autowired
+    // private ChallengeStorage challengeStorage;
 
-    @Autowired
-    private RegistrationStorage creationOptionsStorage;
+    // @Autowired
+    // private RegistrationStorage creationOptionsStorage;
 
     @Autowired
     private RelyingParty relyingParty;
@@ -40,14 +36,15 @@ public class FinishRegistration {
     public CommonResp finishRegistrationService(String userName,
             PublicKeyCredential<AuthenticatorAttestationResponse, ClientRegistrationExtensionOutputs> credential) {
 
+        // Step 1 : Prepare the response
         CommonResp lRespRec = new CommonResp();
         String lStatus = "S";
         String lErrMsg = "";
         String lMsg = "";
 
-        // Retrieve the stored challenge
-        ByteArray storedChallenge = challengeStorage.getChallenge(userName);
-        System.err.println("013 : " + storedChallenge);
+        // Step 2 : Validate challenge by received username
+        ByteArray storedChallenge = inMemorycredentialRepository.getChallenge(userName);
+        System.out.println("013 : " + storedChallenge);
         if (storedChallenge == null) {
             lStatus = "E";
             lErrMsg = "No challenge found for user.";
@@ -56,9 +53,10 @@ public class FinishRegistration {
             return lRespRec;
         }
 
-        // Retrieve the original PublicKeyCredentialCreationOptions
-        PublicKeyCredentialCreationOptions originalRequest = creationOptionsStorage.getOptions(userName);
-        System.err.println("014 : " + originalRequest);
+        // step 3 : Validate PublicKeyCredentialCreationOptions is exist for that
+        // username
+        PublicKeyCredentialCreationOptions originalRequest = inMemorycredentialRepository.getOptions(userName);
+        System.out.println("014 : " + originalRequest);
         if (originalRequest == null) {
             lStatus = "E";
             lErrMsg = "No registration options found for user.";
@@ -67,44 +65,31 @@ public class FinishRegistration {
             return lRespRec;
         }
 
-        // Build FinishRegistrationOptions
+        // step 4 : build the FinishRegistrationOptions
         FinishRegistrationOptions options = FinishRegistrationOptions.builder()
                 .request(originalRequest)
                 .response(credential)
                 .build();
 
-        System.err.println("015 : " + options);
+        System.out.println("015 : " + options);
 
-        // Finish registration
-        RegistrationResult result;
-        ByteArray userHandle = null;
         try {
-            result = relyingParty.finishRegistration(options);
-            System.err.println("016 : " + result);
+            // step 5 : relyingparty registration with this option
+            RegistrationResult result = relyingParty.finishRegistration(options);
+            System.out.println("016 : " + result);
 
-            // Remove stored challenge
-            challengeStorage.removeChallenge(userName);
+            // Step 6 : Extract the userHandle from the UserIdentity
+            ByteArray userHandle = inMemorycredentialRepository.getUserIdentity(userName).getId();
+            System.out.println("017 : " + userHandle);
 
-            // Remove stored registration options
-            creationOptionsStorage.removeOptions(userName);
-
-            // challengeStorage.removeUserIdentity(userName);
-
-            System.err.println("017 : " + result);
-            challengeStorage.getChallengeAndUserIdentidyMap();
-            System.err.println("018 : ");
-            creationOptionsStorage.getAllCredentialCreationOption();
-
-            // Extract the userHandle from the UserIdentity
-            ByteArray DummyuserHandle = challengeStorage.getUserIdentity(userName).getId();
-            System.err.println("019 : " + DummyuserHandle);
-
-            if (inMemorycredentialRepository.getUserHandleForUsername(userName).isPresent()) {
-                userHandle = inMemorycredentialRepository.getUserHandleForUsername(userName).get();
-                System.err.println("020 : " + userHandle);
+            // Step 7 : Check if the userHandle is already present in the repository by
+            // username if exists again reasign the userhandle
+            if (!inMemorycredentialRepository.getUserHandleForUsername(userName).isPresent()) {
+                inMemorycredentialRepository.storeUserNamewithUserHandle(userName, userHandle);
+                inMemorycredentialRepository.storeUserHandlewithUserName(userName, userHandle);
             }
 
-            // Store the credential information
+            // Step 8 : create registeredcredential
             RegisteredCredential registeredCredential = RegisteredCredential.builder()
                     .credentialId(result.getKeyId().getId())
                     .userHandle(userHandle)
@@ -112,11 +97,12 @@ public class FinishRegistration {
                     .signatureCount(result.getSignatureCount())
                     .build();
 
-            System.err.println("021 : " + registeredCredential);
+            System.out.println("021 : " + registeredCredential);
 
+            // Step 9 : store the credential information by userhandle
             inMemorycredentialRepository.addCredential(userName, userHandle, registeredCredential);
-            System.err.println("022 : ");
-            inMemorycredentialRepository.GetMemoryDetails();
+
+            inMemorycredentialRepository.getCred();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,12 +113,74 @@ public class FinishRegistration {
             return lRespRec;
         }
 
+        // step 10 : final response for successful registration
         lMsg = "Passkey Registration Successful";
         lRespRec.setMsg(lMsg);
         lRespRec.setStatus(lStatus);
         lRespRec.setErrMsg(lErrMsg);
-        System.err.println("023 : " + lRespRec);
+        System.out.println("023 : " + lRespRec);
         return lRespRec;
+
+        // ByteArray DummyuserHandle =
+        // inMemorycredentialRepository.getUserIdentity(userName).getId();
+        // System.out.println("019 : " + DummyuserHandle);
+
+        // Step 7 : Check if the userHandle is already present in the repository by
+        // username
+        // if
+        // (inMemorycredentialRepository.getUserHandleForUsername(userName).isPresent())
+        // {
+        // userHandle =
+        // inMemorycredentialRepository.getUserHandleForUsername(userName).get();
+        // System.out.println("020 : " + userHandle);
+        // } else {
+        // inMemorycredentialRepository.storeUserNamewithUserHandle(userName,
+        // userHandle);
+        // inMemorycredentialRepository.storeUserHandlewithUserName(userName,
+        // userHandle);
+        // }
+
+        // System.out.println("022 : ");
+
+        // Remove stored challenge
+        // challengeStorage.removeChallenge(userName);
+
+        // Remove stored registration options
+        // creationOptionsStorage.removeOptions(userName);
+
+        // challengeStorage.removeUserIdentity(userName);
+
+        // System.out.println("017 : " + result);
+        // inMemorycredentialRepository.getChallengeAndUserIdentidyMap();
+        // System.out.println("018 : ");
+        // inMemorycredentialRepository.getAllCredentialCreationOption();
+
+        // Extract the userHandle from the UserIdentity
+        // ByteArray DummyuserHandle =
+        // inMemorycredentialRepository.getUserIdentity(userName).getId();
+        // System.out.println("019 : " + DummyuserHandle);
+
+        // if
+        // (inMemorycredentialRepository.getUserHandleForUsername(userName).isPresent())
+        // {
+        // userHandle =
+        // inMemorycredentialRepository.getUserHandleForUsername(userName).get();
+        // System.out.println("020 : " + userHandle);
+        // }
+
+        // // Step 6 : create registeredcredential
+        // RegisteredCredential registeredCredential = RegisteredCredential.builder()
+        // .credentialId(result.getKeyId().getId())
+        // .userHandle(userHandle)
+        // .publicKeyCose(result.getPublicKeyCose())
+        // .signatureCount(result.getSignatureCount())
+        // .build();
+
+        // // Step 6 : store the credential information by userhandle
+        // inMemorycredentialRepository.addCredential(userName, userHandle,
+        // registeredCredential);
+        // System.out.println("022 : ");
+        // inMemorycredentialRepository.GetMemoryDetails();
 
     }
 
@@ -148,11 +196,14 @@ public class FinishRegistration {
 
     public byte[] base64UrlToByteArray(String base64UrlString) {
         // Ensure the string is properly padded to be a valid Base64 string
-        String paddedBase64 = base64UrlString + "=".repeat((4 - base64UrlString.length() % 4) % 4);
-        // Convert Base64Url to Base64
-        String base64 = paddedBase64.replace('-', '+').replace('_', '/');
-        // Decode the Base64 string
-        return Base64.getDecoder().decode(base64);
+        // String paddedBase64 = base64UrlString + "=".repeat((4 -
+        // base64UrlString.length() % 4) % 4);
+        // // Convert Base64Url to Base64
+        // String base64 = paddedBase64.replace('-', '+').replace('_', '/');
+        // // Decode the Base64 string
+        // return Base64.getDecoder().decode(base64);
+
+        return Base64.getUrlDecoder().decode(base64UrlString);
     }
 
     public static String encode(byte[] bytes) {

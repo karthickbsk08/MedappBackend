@@ -1,0 +1,214 @@
+[
+  {
+    "request": {
+      "rp": {
+        "name": "MedApp",
+        "id": "localhost"
+      },
+      "user": {
+        "name": "Jeeva",
+        "displayName": "Jeeva",
+        "id": "b1cd2ea32f30437b814c05f42be61b86021c50da979f814c1cc55377b01d3c36"
+      },
+      "challenge": "c9c14c49f22108ceac82d32ffdcd4e85d0f546a8176c313267aac2956f598308",
+      "pubKeyCredParams": [
+        { "alg": "ES256", "type": "PUBLIC_KEY" },
+        { "alg": "EdDSA", "type": "PUBLIC_KEY" },
+        { "alg": "ES384", "type": "PUBLIC_KEY" },
+        { "alg": "ES512", "type": "PUBLIC_KEY" },
+        { "alg": "RS256", "type": "PUBLIC_KEY" },
+        { "alg": "RS384", "type": "PUBLIC_KEY" },
+        { "alg": "RS512", "type": "PUBLIC_KEY" }
+      ],
+      "timeout": null,
+      "excludeCredentials": [[]],
+      "authenticatorSelection": null,
+      "attestation": "NONE",
+      "extensions": {
+        "appidExclude": null,
+        "credProps": true,
+        "largeBlob": null,
+        "uvm": false
+      }
+    },
+    "response": {
+      "id": "3ed38bfc20bdb096ca546083761a6750",
+      "response": {
+        "attestationObject": "a363666d74646e6f6e656761747453746d74a0686175746844617461589449960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97635d00000000ea9b8d664d011d213ce4b6b48cb575d400103ed38bfc20bdb096ca546083761a6750a5010203262001215820a1ea280290c1b57f8a1075edf1cbaa4d4efeb3369395db339781e4218c6dbcd5225820d577faf1023ac4a00caf136b3d3c9e38b6bb751000a10f2789e68550801a0ae0",
+        "clientDataJSON": {
+          "type": "webauthn.create",
+          "challenge": "ycFMSfIhCM6sgtMv_c1OhdD1RqgXbDEyZ6rClW9Zgwg",
+          "origin": "http://localhost:8080",
+          "crossOrigin": false
+        },
+        "transports": [],
+        "attestation": {
+          "bytes": "a363666d74646e6f6e656761747453746d74a0686175746844617461589449960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97635d00000000ea9b8d664d011d213ce4b6b48cb575d400103ed38bfc20bdb096ca546083761a6750a5010203262001215820a1ea280290c1b57f8a1075edf1cbaa4d4efeb3369395db339781e4218c6dbcd5225820d577faf1023ac4a00caf136b3d3c9e38b6bb751000a10f2789e68550801a0ae0"
+        },
+        "authenticatorData": {
+          "bytes": "49960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97635d00000000ea9b8d664d011d213ce4b6b48cb575d400103ed38bfc20bdb096ca546083761a6750a5010203262001215820a1ea280290c1b57f8a1075edf1cbaa4d4efeb3369395db339781e4218c6dbcd5225820d577faf1023ac4a00caf136b3d3c9e38b6bb751000a10f2789e68550801a0ae0",
+          "flags": {
+            "value": 93,
+            "UP": true,
+            "UV": true,
+            "BE": true,
+            "BS": true,
+            "AT": true,
+            "ED": false
+          },
+          "attestedCredentialData": {
+            "aaguid": "ea9b8d664d011d213ce4b6b48cb575d4",
+            "credentialId": "3ed38bfc20bdb096ca546083761a6750",
+            "credentialPublicKey": "a5010203262001215820a1ea280290c1b57f8a1075edf1cbaa4d4efeb3369395db339781e4218c6dbcd5225820d577faf1023ac4a00caf136b3d3c9e38b6bb751000a10f2789e68550801a0ae0"
+          }
+        },
+        "format": "none",
+        "attestationStatement": {}
+      },
+      "clientData": {
+        "clientDataJson": {
+          "type": "webauthn.create",
+          "challenge": "ycFMSfIhCM6sgtMv_c1OhdD1RqgXbDEyZ6rClW9Zgwg",
+          "origin": "http://localhost:8080",
+          "crossOrigin": false
+        },
+        "challenge": "c9c14c49f22108ceac82d32ffdcd4e85d0f546a8176c313267aac2956f598308",
+        "origin": "http://localhost:8080",
+        "type": "webauthn.create"
+      }
+    },
+    "authenticatorAttachment": "CROSS_PLATFORM",
+    "clientExtensionResults": {
+      "appidExclude": null,
+      "credProps": {
+        "rk": false
+      },
+      "largeBlob": null
+    },
+    "type": "PUBLIC_KEY",
+    "callerTokenBindingId": null
+  },
+  {
+    "credential": {
+      "id": "3ed38bfc20bdb096ca546083761a6750",
+      "type": "PUBLIC_KEY",
+      "authenticatorAttachment": "CROSS_PLATFORM",
+      "response": {
+        "attestationObject": {
+          "format": "none",
+          "attestationStatement": {},
+          "authenticatorData": {
+            "flags": {
+              "UP": true,
+              "UV": true,
+              "BE": true,
+              "BS": true,
+              "AT": true,
+              "ED": false
+            },
+            "attestedCredentialData": {
+              "aaguid": "ea9b8d664d011d213ce4b6b48cb575d4",
+              "credentialId": "3ed38bfc20bdb096ca546083761a6750",
+              "credentialPublicKey": "a5010203262001215820a1ea280290c1b57f8a1075edf1cbaa4d4efeb3369395db339781e4218c6dbcd5225820d577faf1023ac4a00caf136b3d3c9e38b6bb751000a10f2789e68550801a0ae0"
+            }
+          }
+        },
+        "clientDataJSON": {
+          "type": "webauthn.create",
+          "challenge": "ycFMSfIhCM6sgtMv_c1OhdD1RqgXbDEyZ6rClW9Zgwg",
+          "origin": "http://localhost:8080",
+          "crossOrigin": false
+        }
+      },
+      "clientExtensionResults": {
+        "credProps": {
+          "rk": false
+        }
+      }
+    },
+    "attestationTrusted": false,
+    "attestationType": "NONE",
+    "attestationTrustPath": null
+  },
+  {
+    "credentialId": "ByteArray(3ed38bfc20bdb096ca546083761a6750)",
+    "userHandle": "ByteArray(b1cd2ea32f30437b814c05f42be61b86021c50da979f814c1cc55377b01d3c36)",
+    "publicKeyCose": "ByteArray(a5010203262001215820a1ea280290c1b57f8a1075edf1cbaa4d4efeb3369395db339781e4218c6dbcd5225820d577faf1023ac4a00caf136b3d3c9e38b6bb751000a10f2789e68550801a0ae0)",
+    "signatureCount": 0,
+    "backupEligible": null,
+    "backupState": null
+  },
+  {
+    "publicKeyCredentialRequestOptions": {
+      "challenge": "ByteArray(4c5b448a06cb65085fadd1c4fa53280d2b163855e0d0627455b6c491c7f87d9c)",
+      "timeout": "Optional.empty",
+      "rpId": "localhost",
+      "allowCredentials": "Optional[[PublicKeyCredentialDescriptor(type=PUBLIC_KEY, id=ByteArray(71485e9d7976f96f104d6aef0995f1c4), transports=Optional.empty)]]",
+      "userVerification": "Optional[PREFERRED]",
+      "extensions": {
+        "appid": "Optional.empty",
+        "largeBlob": "Optional.empty",
+        "uvm": false
+      }
+    },
+    "username": "Optional[vishnu]",
+    "userHandle": "Optional.empty"
+  },
+  {
+    "publicKeyCredentialRequestOptions": {
+      "challenge": "ByteArray(4c5b448a06cb65085fadd1c4fa53280d2b163855e0d0627455b6c491c7f87d9c)",
+      "timeout": "Optional.empty",
+      "rpId": "localhost",
+      "allowCredentials": "Optional[[PublicKeyCredentialDescriptor(type=PUBLIC_KEY, id=ByteArray(71485e9d7976f96f104d6aef0995f1c4), transports=Optional.empty)]]",
+      "userVerification": "Optional[PREFERRED]",
+      "extensions": {
+        "appid": "Optional.empty",
+        "largeBlob": "Optional.empty",
+        "uvm": false
+      }
+    },
+    "username": "Optional[vishnu]",
+    "userHandle": "Optional.empty"
+  },
+  {
+    "id": "ByteArray(71485e9d7976f96f104d6aef0995f1c4)",
+    "response": {
+      "authenticatorData": "ByteArray(49960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97631900000000)",
+      "clientDataJSON": "ByteArray(7b2274797065223a22776562617574686e2e676574222c226368616c6c656e6765223a22544674456967624c5a516866726448452d6c4d6f445373574f46586730474a30566262456b636634665a77222c226f726967696e223a22687474703a2f2f6c6f63616c686f73743a38303830222c2263726f73734f726967696e223a66616c73657d)",
+      "signature": "ByteArray(304502207988b7ab9ea21ddad204b5f99a462a089deb1ac82a45d9ff10aa4a02ed3368cd022100a3b833917d2b174a7e5662737c0b23d0536edfebfe99bf953709dad530317fa3)",
+      "userHandle": "Optional[ByteArray(71507238565a536f5341425a396d5f317836574d48754f446d395374674773675a4e5675764e7134615830)]",
+      "parsedAuthenticatorData": {
+        "bytes": "ByteArray(49960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97631900000000)",
+        "flags": {
+          "value": 25,
+          "UP": true,
+          "UV": false,
+          "BE": true,
+          "BS": true,
+          "AT": false,
+          "ED": false
+        },
+        "attestedCredentialData": "Optional.empty",
+        "extensions": "Optional.empty"
+      },
+      "clientData": {
+        "clientDataJson": "ByteArray(7b2274797065223a22776562617574686e2e676574222c226368616c6c656e6765223a22544674456967624c5a516866726448452d6c4d6f445373574f46586730474a30566262456b636634665a77222c226f726967696e223a22687474703a2f2f6c6f63616c686f73743a38303830222c2263726f73734f726967696e223a66616c73657d)"
+      },
+      "clientDataRaw": {
+        "type": "webauthn.get",
+        "challenge": "TFtEigbLZQhfrdHE-lMoDSsWOFXg0GJ0VbbEkcf4fZw",
+        "origin": "http://localhost:8080",
+        "crossOrigin": false
+      },
+      "challenge": "ByteArray(4c5b448a06cb65085fadd1c4fa53280d2b163855e0d0627455b6c491c7f87d9c)",
+      "origin": "http://localhost:8080",
+      "type": "webauthn.get"
+    },
+    "authenticatorAttachment": "Optional.empty",
+    "clientExtensionResults": {
+      "appid": "Optional.empty",
+      "largeBlob": "Optional.empty"
+    },
+    "type": "PUBLIC_KEY"
+  }
+]
